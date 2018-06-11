@@ -1,0 +1,83 @@
+\chapter{\textcolor{red}{Egyébb eszközök és technológiák}}\label{ch:egyebb_eszkozok}
+\section{\textcolor{red}{Alkalmazott munkamódszer}}
+Az alkalmazás fejlesztése a Scrum szofterfejlesztési módszertan szabályainak betartásával zajlott. A Scrum egy inkrementális, iteratív munkamódszer, amely különböző tevékenységeket és meghatározott szerepeket foglal magába (\ref{fig:scrum}. ábra). 
+\begin{figure}
+  \centering
+  \pgfimage[width=0.95\linewidth]{images/scrum}
+  \caption{A Scrum munkamódszer során az alkalmazás fejlesztése meghatározott hosszúságú időintervallumokban zajlik, és minden intervallum végén az alkalmazás egy működő verziója kell elkészüljön.}
+  \label{fig:scrum}
+\end{figure}
+A Scrum szerepkörei a \textsl{Scrum Mester}, aki felügyeli és segíti a csapat önálló munkáját, a \textsl{Csapat}, ami maximum hét-nyolc személyből áll és felelős a fejlesztési folyamatért, illetve a \textsl{Terméktulajdonos} \cite{Scrum}. 
+
+Az iteratív és inkrementális munkamódszer során az alkalmazás fejlesztése meghatározott hosszúságú időintervallumokban zajlik és az intervallumok során a megvalósított funkcionalitások listája fokozatosan bővül. Ezeket az intervallumokat sprinteknek nevezzük. A Scrum esetében az intervallum hossza két-négy hét. Az E-migrated fejlesztése két hetes sprintekben történt.
+
+Minden futam előtt, a \textsl{Futamtervező Megbeszélés} (Sprint Planning) során a csapat a Terméktulajdonos jelenlétében kiválasztja az aktuális sprint során elvégzendő feladatokat a \textsl{Termék Teendőlistájából} (Product Backlog) és azokat áthelyezi a \textsl{Futam Teendőlistájába} (sprint backlog). A sprint akkor sikeres, ha a felvállalt feladatok mind elkészültek a futam végéig és a Terméktulajdonos is elégedett velük. 
+
+A futam során, a csapat a Scrum Mester jelenlétében negyedórás \textsl{Napi Megbeszéléseket} (Daily Scrum) tart, amely során megbeszélik az akadályokat és a következő napi megbeszélésig megvalósítani tervezett feladatokat. 
+
+A \textsl{Futamáttekintés} (Sprint Review) során a csapat bemutatja az adott sprint alatt elkészített funkcionalitásokat, élő demo formájában, a Terméktulajdonos jelenlétében. Ezen a ponton dől el, hogy a sprint sikeresnek tekinthető-e, vagy vannak olyan funkcionalitások, amelyek nem felelnek meg a Terméktulajdonos elvárásainak. 
+
+A \textsl{Visszatekintés} (Retrospective) lehetőséget nyújt a sprint alatt felmerülő problémák megbeszélésére és javítására.
+
+A Scrum szoftverfejlesztési módszer előnyei közé tartozik, hogy a fejlesztők a munka során folyamatos visszajelzést kapnak a megrendelőtől, így a tulajdonos igényeinek megfelelően tudják alakítani az alkalmazás funkcionalitásait.
+
+\section{\textcolor{red}{Verziókövetés és Folyamatos Integráció}}
+A projekt fejlesztése során a verziókövetés megvalósítása Git által történt, projektmenedzsment eszközként és a Folyamatos Integráció  \cite{CI} illetve a Folyamatos Kitelepítés \cite{CD}  biztosítására a GitLab szolgált. 
+
+A GitLab egy platformfüggetlen, nyílt forráskódú webes projektmenedzsment szoftver, amely lehetővé teszi az alkalmazások biztonságos tárolását, különböző funkcionalitásai által segíti a szoftverfejlesztők rugalmas együttműködését, a kódfelmérések és Kódösszeolvasztási Kérelmek  végrehajtását. 
+
+Az E-migrated projekt esetében minden \textsl{user story} új branchen kerül fejlesztésre, amelyek mindig az alkalmazás stabil verzióját tartalmazó \textsl{master} branchből indulnak. A funkcionalitás implementálása végén, a Kódösszeolvasztási Kérelmet követően az új kódrészletek egy ellenőrző fázison esnek keresztül, amelynek lezáródásával az új funkcionalitás bekerül a \textsl{master} branchbe. 
+\begin{figure}[!b]
+  \centering
+  \pgfimage[width=0.9\linewidth]{images/continuous_integration}
+  \caption{A folyamatos integráció megvalósítása. }
+  \label{fig:continuous_integration}
+\end{figure}
+
+A Folyamatos Integráció megvalósítása egy CI pipeline segítségével történik, amelynek különböző fázisai (stagek) a \texttt{gitlab-ci.yml} állományban  konfigurálhatóak. Ez biztosítja, hogy a régebbi funkcionalitások müködőképesek maradjanak az új funkcionalitások beintegrálása után is. Minden push során elindul egy pipeline, amely a \textsl{production} branchet leszámítva, minden branchen három fázisból áll: a kódbázis build-elése, tesztek lefuttatása és a statikus kódelemzés (\ref{fig:continuous_integration}. ábra). Ha bármelyik fázis során hiba történik, az utána következő fázisok nem futnak le, a pipeline elbukik, így biztosíva, hogy hibás verzió ne kerülhessen be a stabil branchbe. A \textsl{production} branch esetében ez a három fázis kiegészül egy negyedikkel, amely során a kódbázis kitelepítése történik az E-migrated teszt szerverre. A kitelepített alkalmazás a \texttt{https://emigrated.test.edu.codespring.ro/} címen érhető el. 
+
+
+
+
+\section{Build és függőségkezelő eszközök}
+\label{subsec:gradle}
+A kliens oldal függőségeit az npm (Node Package Manager) \cite{npm} kezeli, és a Gulp \cite{gulp} injektálja automatikusan a forráskódba a \texttt{gulpfile.js} segítségével. A \texttt{gulpfile.js} különböző task-okból áll, melyek futtathatóak külön-külön, de akár együtt is. 
+
+A Gulp különböző automatizált műveletei segítségével megkönnyíti a fejlesztést, megkíméli a fejlesztőt a webes kód manuális kezelésétől. Beállítható egy figyelő, amely automatikusan frissíti a módosított állományokat (pl. js, css) az alkalmazás build mappájában is. 
+
+Mivel az E-migrated alkalmazás webes kliense egy single-page alkalmazás, célszerű volt a JavaScript forráskódokat egy közös állományba, a \texttt{main.js}-be, összefésülni és a build-elt \texttt{index.html}-ben ezekre egységesen hivatkozni. Az állományok összefűzését szintén a Gulp egyik task-ja, a \texttt{'gulp-concat'} valósítja meg.  
+
+Szerver oldali build- és függőségkezelő eszközként a csapat a Gradle mellett döntött, mely a Maven alternatívája és annak a hiányosságait igyekszik pótolni \cite{Gradle,GradleDoc}. 
+
+Gradle scriptek írására Groovy alapú DSL (Domain Specific Languaget) vagy Kotlin script használható.  A Gradle támogatja a függőségek automatikus letöltését és konfigurálását, több modulos projektek létrehozását, Eclipse projekteket generál, valamint teszteket és kódelemzőket futtat. Az \texttt{'application'} plugin segítségével becsomagolja az alkalmazást teljes függőségi gráffal és indító szkriptekkel, így az egyszerűen elmozgatható bárhova. Külső pluginokkal kiterjesztve lehetővé teszi a build-elési folyamat teljes automatizációját. 
+
+A Gradle a teljes projektet build-eli, hiszen a \texttt{'gulp'} plugin segítségével meghívja a Gulp megfelelő utasításait, ezáltal build-elve a frontend oldali kódot is. Az eredményt pedig a Gradle build mappájába másolja, és beállítja az eclipse classpath-jében, hogy az hol keresse a projekt erőforrásait és hová build-eljen. 
+
+\section{\textcolor{red}{Az alkalmazás tesztelése}}
+\label{sec:tesztek}
+
+Az alkalmazás kliens oldalának tesztelése a Jasmine keretrendszer és a Karma test runner segítségével történt. A Jasmine egy olyan viselkedés orientált (Behaviour Driven) keretrendszer amely JavaScript kódok tesztelésének megkönnyítése érdekében készült. A viselkedés orientáltság biztosítja, hogy a megírt tesztek könnyen olvashatóak és értelmezhetőek legyenek mindenki számára \cite{Jasmine}. A Karma lehetőséget kínál a Jasmin tesztek különböző böngészőkben való automatikus futtatására és az eredmények konzolra történő kiiratására\cite{KarmaJasmine}.
+
+A szerver oldali komponens unit tesztjeinek megírása a Junit keretrendszer míg az E2E (end-to-end) tesztek implementálása a Selenium keretrendszer használatával történt \cite{Selenium}.  
+
+Említést érdemel a \texttt{SpringSecurityTest}, amely ellenőrzi az alkalmazás szerepkörön alapuló jogosultsághozzáférését, tesztelve a REST endpointokhoz illetve a statikus erőforrásokhoz vezető útvonalatakat. 
+
+A Selenium egy olyan keretrendszer, amely lehetőséget biztosít az alkalmazás Black Box jellegű tesztelésére, vagyis segítségével tesztelhetőek a szoftver funkcionalitásai, anélkül, hogy az implementációs részleteket ismerni kellene \cite{Selenium}. Az alkalmazás fontosabb funkcionalitásai ellenőrizve vannak E2E tesztek által is.
+
+Az projekt build-elése során lefutnak a szerver illetve kliens oldali unit tesztek, melyek sikertelensége a build folyamat bukásához vezet. Az E2E tesztek egyelőre nincsenek automatizálva, nem képezik részét a push során létrejövő pipline egyetlen fázisának sem. 
+
+
+\section{\textcolor{red}{Statikus kódelemzés}}
+\label{subsec:statikusKodElemzes}
+
+Szerver oldali statikus kódelemző a Checkstyle és a FindBugs, amelyeknek célja ellenőrizni hogy a Java forráskód megfelel-e bizonyos konvencióknak és szabványoknak~\cite{Checkstyle, FindBugs}. Segítségükkel növelhető a forráskód minősége, átláthatósága, újrafelhasználhatósága. 
+Kliens oldalon a csapat a JSHintet választotta statikus kódelemzőnek, amely  ellenőrzni a JavaScript kód helyességét, figyelmeztet, ha potenciális hibákat, problémákat, gyanús kódot talál a forráskódban \cite{JSHint}.
+
+A Gradle \texttt{'check'} taskja és a gulp\texttt{'jshint'}-je segítségével a projekt build-elésekor, a CI alatt, a kliens- és szerveroldali statikus kódelemzők lefutnak és megakadályozzák a hibás build-ek megjelenését a tesztszerveren. 
+
+
+\section{\textcolor{red}{Használt fejlesztői környezetek}}
+\label{subsec:fejleszoiKornyezet}
+
+A szerver oldal fejlesztése Eclipse \cite{Eclipse} fejlesztői környezetben történt, amely a Buildship Gradle Integration plugin-al \cite{GradlePlugin} kiegészítve alkalmas Gradle alkalmazások beintegrálására és kibővítve a FindBugs Eclipse Plugin-nal\cite{FindBugsEclipsePlugin} lehetővé teszi a statikus kódelemzést implemetálás közben. A kliens oldal fejlesztése pedig a Visual Studio Code \cite{VSCode} segítségével történt, mivel kiegészíthető HTML, CSS és JS szerkeztőkkel, valamint frontend oldali statikus kódelemzővel. 
+%tesztekrol irni

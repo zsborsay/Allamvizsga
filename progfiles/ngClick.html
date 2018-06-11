@@ -1,0 +1,13 @@
+<div ng-init="requestInvitation.init()" ng-show="requestInvitation.loaded">
+    <div ng-repeat="request in requestInvitation.requests">
+        <p>{{request.email}}</p>
+        <p>{{request.userMessage}}</p>
+        <button translate="ACCEPT" 
+        ng-click="requestInvitation.sendAcceptEmail(request)"></button>
+        <button translate="DECLINE" 
+        ng-click="requestInvitation.sendDeclineEmail(request)"></button>
+        <button translate="DELETE" 
+        ng-click="requestInvitation.confirmDelete(request)"></button>
+    </div>
+</div>
+                               
