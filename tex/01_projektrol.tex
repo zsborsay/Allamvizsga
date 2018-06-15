@@ -1,8 +1,12 @@
 \chapter{\textcolor{red}{Az E-migrated projekt}}\label{ch:projektrol}
 
+\begin{osszefoglal}
+Az alkalmazás célja egy olyan felület kialakítása, amely összekapcsolja a külföldön élő, Székelyföldről elszármazott szakembereket, ezáltal lehetővé téve számukra a kölcsönös segítségnyújtást és tapasztalatcserét. A jelen fejezet ismerteti a felhasználók számára elérhető funkcionalitásokat, bemutatja a szerver és kliens, illetve a szerver és adatbázis közötti kommunikációt és szemlélteti az alkalmazás adatmodelljét.
+\end{osszefoglal}
+
 \section{\textcolor{red}{A projekt funkcionalitásai}}\label{sec:projektrol:funkcionalitasok}
 
-Ez a fejezet az érthetőségre és átláthatóságra törekedve bemutatja az alkalmazás összes funkcionalitását, nem csak az általam fejlesztetteket. Azokat a funkcionalitásokat, amelyek implementálásánál nagyobb szerepem volt, a use-case diagrammokon dőlt betüvel és narancssárga színnel jelöltem (\ref{fig:vendeg_use_case}.,\ref{fig:felhasznalo_user_case}. és \ref{fig:admin_use_case}. ábrák ) . 
+Ez a fejezet az érthetőségre és átláthatóságra törekedve bemutatja az alkalmazás összes funkcionalitását, nem csak az szerző által fejlesztetteket. Azokat a funkcionalitásokat, amelyek implementálásánál nagyobb szerepem volt, a use-case diagrammokon dőlt betüvel és narancssárga színnel jelöltem (\ref{fig:vendeg_use_case}., \ref{fig:felhasznalo_user_case}. és \ref{fig:admin_use_case}. ábrák). 
 
 \begin{figure}
   \centering
@@ -10,7 +14,7 @@ Ez a fejezet az érthetőségre és átláthatóságra törekedve bemutatja az a
   \caption{A vendég (nem bejelentkezett) felhasználók számára elérhető funkcionalitások.}
   \label{fig:vendeg_use_case}
 \end{figure}
-Az alkalmazás főoldalán egy világtérkép  látható, amelyen kluszterezett formában vannak megjelenítve a már csatlakozott szakemberek. A vendégfelhasználók (nem regszitrált felhasználók) szűrhetik a felhasználókat foglalkozás szerint, de nem jeleníthetnek meg róluk semmilyen személyes információt. Amennyiben szeretnék látni a rendszer felhasználóinak publikus adatait, de nincsen olyan ismerősük, akitől meghívót kérhetnének, meghívó igénylést küldhetnek az adminisztrátornak, csatolva az önéletrajzukat és egy rövid motivációs levelet, amelyben megindokolják, hogy miért szeretnének csatlakozni.
+Az alkalmazás főoldalán egy világtérkép  látható, amelyen kluszterezett formában vannak megjelenítve a már csatlakozott szakemberek. A vendégfelhasználók (nem regisztrált felhasználók) szűrhetik a felhasználókat foglalkozás szerint, de nem jeleníthetnek meg róluk semmilyen személyes információt (\ref{fig:vendeg_use_case}. ábra). Amennyiben szeretnék látni a rendszer felhasználóinak publikus adatait, de nincsen olyan ismerősük, akitől meghívót kérhetnének, meghívó igénylést küldhetnek az adminisztrátornak, csatolva az önéletrajzukat és egy rövid motivációs levelet, amelyben megindokolják, hogy miért szeretnének csatlakozni.
 
 \begin{figure}
   \centering
@@ -19,51 +23,52 @@ Az alkalmazás főoldalán egy világtérkép  látható, amelyen kluszterezett 
   \label{fig:felhasznalo_user_case}
 \end{figure}
 
-Regisztráció után az előbb említett térképen, rákattintva a térképjelzőkre kilistázhatják az adott régióban élő felhasználókat, illetve a felhasználók nevére kattintva átnavigálhatnak az adott személy publikus profil oldalára, ahol bővebb információhoz juthatnak. 
+Regisztráció után az előbb említett térképen, rákattintva a térképjelzőkre kilistázhatják az adott régióban élő felhasználókat, illetve a felhasználók nevére kattintva átnavigálhatnak az adott személy publikus profil oldalára, ahol bővebb információhoz juthatnak (\ref{fig:felhasznalo_user_case}. ábra). 
 
 A bejelentkezett felhasználók meghívókat küldhetnek ismerőseiknek és megtekinthetik a régebben elküldött meghívóikat, illetve, hogy azok el vannak-e fogadva vagy még függőben állnak. Kezdetben minden felhasználó korlátozott számú meghívóval rendelkezik, ami arra ösztönzi őket, hogy gondolják meg jól, hogy kinek küldik el azokat.
 
-Egy meghívót kapott személy kétféle regisztráció közül választhat, regisztrálhat szociális háló segítségével, amely egyszerű, nem igényli bonyolult formok kitöltését, hiszen a rendszer minden szükséges információt megkap az adott szociális hálótól. A későbbiekben a bejelentkezés is történhet az adott háló segítségével, így nincs szükség újabb felhasználónév és jelszó megjegyzésére sem. Az alkalmazás jelenleg a Facebook-kal való regisztrációt és bejelentkezést támogatja. A másik lehetőség a hagyományos regisztráció, amely során egy regisztrációs formot kell kitölteni általános profiladatokkal (név, felhasználónév, jelszó, foglalkozás stb.). Ha valaki hagyományosan regisztrált, de szeretné összekapcsolni a Facebook fiókját a már meglévő profiljával, annak érdekében, hogy egyszerűbbé tegye a bejelentkezést, megteheti ezt regisztráció után is. 
+Egy meghívót kapott személy kétféle regisztráció közül választhat, regisztrálhat szociális háló segítségével, amely egyszerű, nem igényli bonyolult formok kitöltését, hiszen a rendszer minden szükséges információt megkap az adott szociális hálótól. A későbbiekben a bejelentkezés is történhet az adott háló segítségével, így nincs szükség újabb felhasználónév és jelszó megjegyzésére sem. Az alkalmazás jelenleg a Facebookkal való regisztrációt és bejelentkezést támogatja. A másik lehetőség a hagyományos regisztráció, amely során egy regisztrációs formot kell kitölteni általános profiladatokkal (név, felhasználónév, jelszó, foglalkozás stb.). Ha valaki hagyományosan regisztrált, de szeretné összekapcsolni a Facebook fiókját a már meglévő profiljával, annak érdekében, hogy egyszerűbbé tegye a bejelentkezést, megteheti ezt regisztráció után is. 
 
-Minden felhasználó módosíthatja a regisztráció során megadott adatait, illetve kiegészítheti ezeket például profilképpel és markdown szintaxissal megadott önéletrajzzal. Bármilyen profilmodósítás során, illetve regisztrációkor a felhasználók elismerik, hogy olvasták és elfogadják az E-migrated alkalmazás adatvédelemre vonatkozó szabályzatát, amely megfelel az európai GDPR (General Data Protection Regulation) elveknek. A szabályzat leírja, hogy az alkalmazás hogyan kezeli, hogyan tárolja illetve mire használja a felhasználó által megadott személyes adatokat.
+Minden felhasználó módosíthatja a regisztráció során megadott adatait, illetve kiegészítheti ezeket például profilképpel és Markdown szintaxissal megadott önéletrajzzal. Bármilyen profilmodósítás során, illetve regisztrációkor a felhasználók elismerik, hogy olvasták és elfogadják az E-migrated alkalmazás adatvédelemre vonatkozó szabályzatát, amely megfelel az európai GDPR (General Data Protection Regulation) elveknek\footnote{\url{https://www.eugdpr.org/}}. A szabályzat leírja, hogy az alkalmazás hogyan kezeli, hogyan tárolja illetve mire használja a felhasználó által megadott személyes adatokat.
 
 A rendszerhez való csatlakozás után a felhasználók bejegyzéseket hozhatnak létre, megtekinthetik és törölhetik az általuk létrehozott bejegyzéseket, és böngészhetik a mások által közzétetteket. 
 
-Egy bejelentkezett felhasználó törölheti a fiókját, ha már nem szeretné tovább használni az alkalmazást. Törlés során két lehetőség közül választhatnak: szeretnék, hogy a fiókjuk törlése során törlődjenek az általuk létrehozott bejegyzések, vagy szeretnék, ha a bejegyzéseik megmaradnának, annak érdekében, hogy a többi felhasználó továbbra is láthassa, illetve visszakereshesse azokat. Ha a második opciót választják a profiljuk törlése után, az összes általuk írt bejegyzés hozzá lesz rendelve egy névtelen felhasználói fiókhoz.
+Egy bejelentkezett felhasználó törölheti a fiókját, ha már nem szeretné tovább használni az alkalmazást. Törlés során két lehetőség közül választhat: szeretnék, hogy a fiókjuk törlése során törlődjenek az általuk létrehozott bejegyzések, vagy szeretnék, ha a bejegyzéseik megmaradnának, annak érdekében, hogy a többi felhasználó továbbra is láthassa, illetve visszakereshesse azokat. Ha a második opciót választják a profiljuk törlése után, az összes általuk írt bejegyzés hozzá lesz rendelve egy névtelen felhasználói fiókhoz.
 
-A rendszer adminisztrátorai részére elérhető minden olyan funkcionalitás ami egy átlagos felhasználó számára, viszont számukra a lista további funkcionalitásokkal bővül. Adminisztrátor nézetbe való váltás után, lehetőségük van szerkeszteni a foglalkozásokat, újakat vezetni be a rendszerve, illetve törölni egy már meglévőt, ha nincsen hozzá rendelve egyetlen szakember se. Az adminisztrátorok bírálják el a beérkező meghívó kéréseket, elfogadhatják, elutasíthatják illetve törölhetik ezeket, egy esetleges rövid személyes üzenet kíséretében, amelyet az illető személy egy automatikus üzenet törzsébe ágyazva kap majd meg. 
+A rendszer adminisztrátorai részére elérhető minden olyan funkcionalitás, ami egy átlagos felhasználó számára, viszont számukra a lista további funkcionalitásokkal bővül. Adminisztrátor nézetbe való váltás után lehetőségük van szerkeszteni a foglalkozásokat, újakat vezetni be a rendszerbe, illetve törölni egy már meglévőt, ha nincsen hozzá rendelve egyetlen szakember se. Az adminisztrátorok bírálják el a beérkező meghívó kéréseket, elfogadhatják, elutasíthatják illetve törölhetik ezeket, egy esetleges rövid személyes üzenet kíséretében, amelyet az illető személy egy automatikus üzenet törzsébe ágyazva kap majd meg. 
 
-Az adminisztrátorok kilistázhatják az alkalmazás felhasználóit, kereshetnek köztük név szerint és indokolt esetben fel is függeszthetnek egy felhasználói fiókot. A felfügesztett személyek emailben kapnak értesítést, és számukra a bejelentkezés nem lehetséges egészen addig, amíg az adminisztrátor újra nem aktiválja a profiljukat. 
+Az adminisztrátorok kilistázhatják az alkalmazás felhasználóit, kereshetnek köztük név szerint és indokolt esetben fel is függeszthetnek egy felhasználói fiókot (\ref{fig:admin_use_case}. ábra). A felfüggesztett személyek e-mailben kapnak értesítést, és számukra a bejelentkezés nem lehetséges egészen addig, amíg az adminisztrátor újra nem aktiválja a profiljukat. 
 
 \begin{figure}
   \centering
-  \pgfimage[width=0.8\linewidth]{images/admin_use_case}
+  \pgfimage[width=0.95\linewidth]{images/admin_use_case}
   \caption{Az adminisztrátorok számára elérhető funkcionalitások.}
   \label{fig:admin_use_case}
 \end{figure}
 
 \section{\textcolor{red}{Komponensek kommunikációjának megvalósítása}}\label{sec:projektrol:kommunikacio}
-Az alkalmazás legösszetettebb komponense, a szerver, Java programozási nyelvben íródott és szolgáltatásait a webkliens számára REST (Representation State Transfer) konvencióknak megfelelő endpointokon keresztül publikálja, melyek HTTP kérések által érhetőek el. 
-\begin{figure}[!b]
+Az alkalmazás legösszetettebb komponense, a szerver, Java programozási nyelvben íródott és szolgáltatásait a web-kliens számára REST (Representational State Transfer) \cite{REST} konvencióknak megfelelő endpointokon keresztül publikálja, melyek HTTP kérések által érhetőek el. 
+\begin{figure}[!t]
   \centering
-  \pgfimage[width=0.6\linewidth]{images/kommunikacio}
+  \pgfimage[width=0.65\linewidth]{images/kommunikacio}
   \caption{Az alkalmazás legösszetettebb komponense, a szerver, Java programozási nyelvben íródott és szolgáltatásait a webkliens számára REST konvencióknak megfelelő endpointokon keresztül publikálja, melyek HTTP kérések által érhetőek el. A perzisztencia megvalósítására MySQL adatbázist használ, mellyel a Spring JPA segítségével kommunikál.}
   \label{fig:kommunikacio}
 \end{figure}
 
-A REST egy olyan architektúrális modell, amelyet az állapot nélküli, HTTP protokollon keresztül történő kliens-szerver kommunikáció megvalósítására terveztek. Az állapotmentességből kifolyólag, a szerver nem tárol információt a kliensről, ezért minden hozzá érkező kérésnek tartalmaznia kell a kliens azonosításához szükséges adatokat. Az adatok és a hozzájuk tartozó műveletek erőforrásokként vannak publikálva a szerver által, amelyeket meghatározott URI-k azonosítanak. Az adatok kezelése és módosítása a GET, POST, PUT és DELETE műveletek által valósítható meg. A szabvány nem szögezi le a kérések illetve a válaszok formátumát, de a leggyakrabban használt formátum az XML és JSON \cite{REST}. Az E-migrated projekt esetében a kérések és válaszok küldése JSON formátumban történik.  
+A REST egy olyan architektúrális modell, amelyet az állapot nélküli, kliens-szerver kommunikáció megvalósítására terveztek. Az állapotmentességből kifolyólag a szerver nem tárol információt a kliensről, ezért minden hozzá érkező kérésnek tartalmaznia kell a kliens azonosításához szükséges adatokat. Az adatok és a hozzájuk tartozó műveletek erőforrásokként vannak publikálva a szerver által, amelyeket meghatározott URI-k azonosítanak. Az adatok kezelése és módosítása a POST, PUT és DELETE műveletek által, míg az adatok lekérése a GET művelet segítségével valósítható meg. A szabvány nem szögezi le a kérések illetve a válaszok formátumát, de a leggyakrabban használt formátum az XML és JSON \cite{REST}. Az E-migrated projekt esetében a kérések és válaszok küldése JSON formátumban történik.  
 
-A perzisztencia megvalósítására MySQL adatbázist használ, mellyel a Spring keretrendszer által biztosított Java Persistence API (JPA) imlementációja segítségével kommunikál. A Spring JPA egy absztrakciós szintet képvisel a JPA fölött, a fejlesztőknek nem kell implementálniuk az adathozzáférést végző osztályokat, csupán azok interfészeit. 
+A perzisztencia megvalósítására MySQL adatbázist használ, mellyel a Spring keretrendszer által biztosított Java Persistence API (JPA) imlementációja segítségével kommunikál. A Spring JPA egy absztrakciós szintet képvisel a JPA fölött, a fejlesztőknek nem kell implementálniuk az adathozzáférést végző osztályokat, elegendő kiterjeszteniük a keretrendszer által biztosított interfészeket. 
 
 
-
+\begin{reviewed}
 \section{Adatmodell}\label{sec:projektrol:adatmodell}
-\begin{figure}[!b]
+\begin{figure}[!t]
   \centering
-  \pgfimage[width=0.9\linewidth]{images/adatmodell}
+  \pgfimage[height=0.7\linewidth]{images/adatmodell}
   \caption{Az E-migrated alapvető entitásai egyszerű Java Bean-ek, melyek a BaseEntity ősosztályból származnak. Az alkalmazás központi egysége a User osztály\protect{,} mely a rendszer felhasználóit ábrázolja. Hozzá kötődő entitások az Address\protect{,} Profession\protect{,} CurrentUser\protect{,} RegistrationToken és FacebookAccount osztályok\protect{,} valamint a Role enum. A meghívó igényléseket pedig az InvitationRequest osztály ábrázolja.}
   \label{fig:adatmodell}
 \end{figure}
+
 Az E-migrated alkalmazáson belüli entitások Java Beanek, amelyek egyszerű getter és setter
 metódusokat, valamint egy paraméter nélküli konstruktort tartalmaznak. Minden bean a \texttt{BaseEntity} ősosztály leszármazottja. A \texttt{BaseEntity} egyetlen attributúmmal rendelkezik, a UUID-val, amely egy egyedi, rendszer szintű azonosító és a relációs adatbázisban az entitásoknak megfelelő táblák elsődleges kulcsa. 
 
@@ -79,7 +84,7 @@ A \texttt{Post} osztály egy felhasználó által készített bejegyzést jelké
 
 Az \texttt{InvitationRequest} entitás teszi lehetővé a meghívók igénylését a közösséghez való csatlakozás érdekében. Tartalmazza  a meghívót kérő személy email címét, rövid motivációs levelét, önéletrajzát illetve az igénylés dátumát. 
 
-A meghíváson alapuló regisztráció megvalósítását a \texttt{RegistrationToken} osztály biztosítja, mely tartalmazza magát a tokent, a token lejárati idejét, az email címet amelyre küldték a meghívót, illetve tárolja a felhasználót aki küldte a meghívót. 
+A meghíváson alapuló regisztráció megvalósítását a \texttt{RegistrationToken} osztály biztosítja, mely tartalmazza magát a tokent, a token lejárati idejét, az email címet amelyre küldték a meghívót, illetve tárolja a felhasználót, aki küldte a meghívót. 
 
 A szerepkör alapú jogosultságkezelés a \texttt{Role} enum típus segítségével valósul meg, melynek értéke lehet \texttt{ROLE\_USER} és \texttt{ROLE\_ADMIN}. Minden felhasználó rendelkezik egy szerepkörrel, amely regisztrációkor automatikusan a \texttt{ROLE\_USER} értéket kapja. 
-
+\end{reviewed}

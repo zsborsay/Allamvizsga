@@ -28,11 +28,12 @@
 \usepackage{latexsym}
 \usepackage{multicol}
 \usepackage{setspace}
+\usepackage{indentfirst}
 
 %%% bibliography
 % \usepackage[square]{natbib}
 % \usepackage[numbers,sort]{natbib}
-\usepackage[square,sort]{natbib}
+\usepackage[numbers,sort]{natbib}
 \usepackage{natbibspacing}
 %%
 
@@ -60,7 +61,10 @@
 \definecolor{citeCol}{rgb}{0.1, 0.2, 0.3}
 \definecolor{urlCol} {rgb}{0.2, 0.2, 0.5}
 %%
-
+%%reviewd text color
+\definecolor{reviewedCol}{rgb}{0.17, 0.647, 0}
+\newenvironment{reviewed}{\par\color{reviewedCol}}{\par}
+%%%
 \usepackage[%
     raiselinks=true,  %
     colorlinks=true,  %
