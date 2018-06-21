@@ -5,7 +5,7 @@
 
 \section{Kliens oldali architekturális megoldások}
 Az E-migrated alkalmazás kliens oldali MVC-t (Model-View-Controller) alkalmaz \cite{WebMVC}, ezáltal elkülönítve a nézetet az adatoktól és a vezérléstől. A kliens oldali MVC esetében a szerver csak statikus erőforrásként szolgál, nem teljesen felépített nézeteket küld vissza, csupán az ezek rendereléséhez szükséges adatokat szolgáltatja REST erőforrások formájában. A kliens oldal felelős ezek feldolgozásáért és megfelelő megjelenítéséért a kapott adatok és a meglévő sablonok alapján.
-Az alkalmazás kliens oldalának architekturális megoldásai \aref{fig:ClientArchitecture} ábrán lathatóak. 
+Az alkalmazás kliens oldalának architekturális megoldásai \aref{fig:ClientArchitecture}. ábrán lathatóak. 
 
 \begin{figure}
   \centering
@@ -39,7 +39,7 @@ A Web Controller a kliens oldali MVC üzleti logika részét képezi. Felelős a
 
 Minden nézethez hozzárendelhető egy vagy több vezérlő, amelyeket az \texttt{ng-controller} direktívák segítségével vagy az \texttt{app.config} állományban állíthatunk be. A kontroller létrejövetelekor hozzárendelődik a DOM-hoz és egy \texttt{\$scope} objektumon keresztül hozzáférést kap a nézet elemeihez, amelyeket ezáltal irányíthat és módosíthatja tulajdonságaikat. 
 
-A nézet inicializálása az \texttt{ng-init} direktívának megadott metódus aktiválása által történik, automatikusan. Minden a nézetben használni kívánt metódust hozzá kell rendelni a vezérlő \texttt{\$scope}  objektumához. Ez teszi lehetővé, hogy a kontroller különböző események hatására megfelelő viselkedést biztosíthasson. Ilyen esemény lehet például egy gombra való kattintás, amely során a gomb \texttt{ng-click} direktívájának értékeként megadott metódus aktiválódik. \Aref{lst:ngClick} kódrészletben látható a meghívó kérések kilistázása, amelyeket az adminisztrátor elfogadhat, elutasíthat vagy törölhet, kattintása során aktiválva a \texttt{RequestInvitation} kontroller megfelelő metódusát.
+A nézet inicializálása az \texttt{ng-init} direktívának megadott metódus aktiválása által történik, automatikusan. Minden a nézetben használni kívánt metódust hozzá kell rendelni a vezérlő \texttt{\$scope}  objektumához. Ez teszi lehetővé, hogy a kontroller különböző események hatására megfelelő viselkedést biztosíthasson. Ilyen esemény lehet például egy gombra való kattintás, amely során a gomb \texttt{ng-click} direktívájának értékeként megadott metódus aktiválódik. \Aref{lst:ngClick}. kódrészletben látható a meghívó kérések kilistázása, amelyeket az adminisztrátor elfogadhat, elutasíthat vagy törölhet, kattintása során aktiválva a \texttt{RequestInvitation} kontroller megfelelő metódusát.
 
 \begin{listing}
   \inputminted[fontsize=\small]{html}{progfiles/ngClick.html}
