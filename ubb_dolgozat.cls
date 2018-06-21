@@ -115,7 +115,7 @@
     {\fontsize{16}{18}\selectfont\scshape\noindent%
       \begin{minipage}[t]{0.6\linewidth}%
         \baselineskip 2ex \parskip 0.5ex
-        \noindent Advisor:\vspace*{0.3cm}
+        \noindent Advisors:\vspace*{0.3cm}
         
         \@tutorEN
       \end{minipage}
@@ -125,7 +125,7 @@
         \baselineskip 2ex \parskip 0.5ex
         Student:\vspace*{0.3cm}
         
-        \@author
+        \@authorEN
       \end{minipage}
     }
     \vspace*{0mm}
@@ -153,7 +153,7 @@
     {\fontsize{16}{18}\selectfont\scshape\noindent%
       \begin{minipage}[t]{0.6\linewidth}%
 				\baselineskip 2ex \parskip 0.5ex
-        \noindent Conduc\u{a}tor \c{s}tiin\c{t}ific:\vspace*{0.3cm}
+        \noindent Conduc\u{a}tori \c{s}tiin\c{t}ific:\vspace*{0.3cm}
         
         \@tutorRO
       \end{minipage}
@@ -163,7 +163,7 @@
         \baselineskip 2ex \parskip 0.5ex
         Absolvent:\vspace*{0.3cm}
         
-        \@author
+        \@authorRO
       \end{minipage}
     }
     \vspace*{0mm}
@@ -191,7 +191,7 @@
     {\fontsize{16}{18}\selectfont\scshape\noindent%
       \begin{minipage}[t]{0.6\linewidth}%
       	\baselineskip 2ex \parskip 0.5ex
-        \noindent T\'emavezet\H{o}:\vspace*{0.3cm}
+        \noindent T\'emavezet\H{o}k:\vspace*{0.3cm}
         
         \@tutorHU
       \end{minipage}
@@ -201,7 +201,7 @@
         \baselineskip 2ex \parskip 0.5ex
         Szerz\H{o}:\vspace*{0.3cm}
         
-        \@author
+        \@authorHU
       \end{minipage}
     }
     \vspace*{0mm}
@@ -364,7 +364,10 @@
 \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                     {3.25ex \@plus1ex \@minus.2ex}%
                                     {-1em}%
-                                    {\reset@font\normalsize\bfseries}}
+                                   
+49
+ Code check failed
+ {\reset@font\normalsize\bfseries}}
 \newcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
                                        {3.25ex \@plus1ex \@minus .2ex}%
                                        {-1em}%
@@ -424,9 +427,9 @@
   }
   { \par\vspace{5mm}
     \vspace{2em}
-    {\noindent\fontsize{16}{18}\selectfont\scshape\@submityear \hfill\@author\par}%
+    {\noindent\fontsize{16}{18}\selectfont\scshape\@submityear \hfill\@authorEN\par}%
     \vspace*{3em}
-    {\noindent\scshape\fontsize{16}{18}\selectfont Advisor:\\
+    {\noindent\scshape\fontsize{16}{18}\selectfont Advisors:\\
     \@tutorEN}
     \vspace*{-.5cm}
     \endtitlepage
@@ -708,7 +711,6 @@
 \frenchspacing
 %%
 
-%
 % MAGYAR ATTRIBUTUMOK
 %
 \def\uniHU#1{\gdef\@uniHU{#1}}
@@ -722,6 +724,9 @@
 \def\tutorHU#1{\gdef\@tutorHU{#1}}
 \gdef\@tutorHU{}
 \tutorHU{[Tit. Egy Tanar]}
+\def\authorHU#1{\gdef\@authorHU{#1}}
+\gdef\@authorHU{}
+\authorHU{[Szerző]}
 %
 % ROMAN ATTRIBUTUMOK
 %
@@ -736,6 +741,9 @@
 \def\tutorRO#1{\gdef\@tutorRO{#1}}
 \gdef\@tutorRO{}
 \tutorRO{[Tit. Un profesor]}
+\def\authorRO#1{\gdef\@authorRO{#1}}
+\gdef\@authorRO{}
+\authorRO{[Autor]}
 %
 % ANGOL ATTRIBUTUMOK
 %
@@ -750,6 +758,9 @@
 \def\tutorEN#1{\gdef\@tutorEN{#1}}
 \gdef\@tutorEN{}
 \tutorEN{[Teacher, Tit]}
+\def\authorEN#1{\gdef\@authorEN{#1}}
+\gdef\@authorEN{}
+\authorEN{[Author]}
 %
 % EV
 \def\submityear#1{\gdef\@submityear{#1}}

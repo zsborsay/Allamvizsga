@@ -4,6 +4,25 @@
 \usepackage[utf8]{inputenc}% FONTS
 \usepackage{times}
 \usepackage[T1]{fontenc}
+
+% kódrészletek beszúrására és szintaxisszínezésére alkalmas könyvtár
+\RequirePackage[newfloat=true]{minted}
+
+% a következő szükséges, hogy a minted együttműködjön a magyar babel-lel
+% ld. https://github.com/gpoore/minted/issues/158
+\makeatletter
+\minted@checkstyle{}
+\renewcommand{\fps@listing}{t}
+\SetupFloatingEnvironment{listing}{name=kódrészlet}
+\makeatother
+
+% ábrák beszúrására és felcimkézésére alkalmas könyvtárak
+\RequirePackage{graphicx} 
+\RequirePackage{float}
+\RequirePackage{wrapfig}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+
 % FONTS for typewriter
 %\usepackage[scaled=0.7]{luximono}
 %\renewcommand\ttdefault{ul9}
@@ -14,10 +33,10 @@
 \setlength{\cftbeforesecskip}{0.0ex}
 % Helvetica-Narrow Bold for Chapter entries
 \renewcommand{\cftchapfont}{%
-  \fontsize{11}{13}\usefont{OT1}{phv}{bc}{n}\selectfont
+  \fontsize{11}{13}\usefont{6OT1}{phv}{bc}{n}\selectfont
 }
 \addtolength{\belowcaptionskip}{1pt}
-\addtolength{\abovecaptionskip}{-12pt}
+\addtolength{\abovecaptionskip}{0.2pt}
 
 \usepackage{pgf,tikz}
 \usetikzlibrary{shapes,arrows,calc}
@@ -28,8 +47,8 @@
 \usepackage{latexsym}
 \usepackage{multicol}
 \usepackage{setspace}
-\usepackage{indentfirst}
-
+% fejezetenkénti első bekezdés indentálása
+\RequirePackage{indentfirst}
 %%% bibliography
 % \usepackage[square]{natbib}
 % \usepackage[numbers,sort]{natbib}
@@ -41,16 +60,6 @@
 \newcommand{\citeN}{\protect\citet}
 
 %% CODE
-% kódrészletek beszúrására és szintaxisszínezésére alkalmas könyvtár
-\RequirePackage[newfloat=true]{minted}
-
-% a következő szükséges, hogy a minted együttműködjön a magyar babel-lel
-% ld. https://github.com/gpoore/minted/issues/158
-\makeatletter
-\minted@checkstyle{}
-\renewcommand{\fps@listing}{t}
-\SetupFloatingEnvironment{listing}{name=kódrészlet}
-\makeatother
 \definecolor{codeCol}{rgb}{0,0.15,0.15}
 \definecolor{codeBGCol}{rgb}{0.8,0.9,0.99}
 \newcommand{\code}[1]{%
@@ -65,6 +74,7 @@
 \definecolor{reviewedCol}{rgb}{0.17, 0.647, 0}
 \newenvironment{reviewed}{\par\color{reviewedCol}}{\par}
 %%%
+%%
 \usepackage[%
     raiselinks=true,  %
     colorlinks=true,  %
