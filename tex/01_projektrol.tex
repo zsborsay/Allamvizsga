@@ -1,10 +1,10 @@
-\chapter{\textcolor{red}{Az E-migrated projekt}}\label{ch:projektrol}
+\chapter{Az E-migrated projekt}\label{ch:projektrol}
 
 \begin{osszefoglal}
 Az alkalmazás célja egy olyan felület kialakítása, amely összekapcsolja a külföldön élő, Székelyföldről elszármazott szakembereket, ezáltal lehetővé téve számukra a kölcsönös segítségnyújtást és tapasztalatcserét. A jelen fejezet ismerteti a felhasználók számára elérhető funkcionalitásokat, bemutatja a szerver és kliens, illetve a szerver és adatbázis közötti kommunikációt és szemlélteti az alkalmazás adatmodelljét.
 \end{osszefoglal}
 
-\section{\textcolor{red}{A projekt funkcionalitásai}}\label{sec:projektrol:funkcionalitasok}
+\section{A projekt funkcionalitásai}\label{sec:projektrol:funkcionalitasok}
 
 Ez a fejezet az érthetőségre és átláthatóságra törekedve bemutatja az alkalmazás összes funkcionalitását, nem csak az szerző által fejlesztetteket. Azokat a funkcionalitásokat, amelyek implementálásánál nagyobb szerepem volt, a use-case diagrammokon dőlt betüvel és narancssárga színnel jelöltem (\ref{fig:vendeg_use_case}., \ref{fig:felhasznalo_user_case}. és \ref{fig:admin_use_case}. ábrák). 
 
@@ -46,7 +46,7 @@ Az adminisztrátorok kilistázhatják az alkalmazás felhasználóit, kereshetne
   \label{fig:admin_use_case}
 \end{figure}
 
-\section{\textcolor{red}{Komponensek kommunikációjának megvalósítása}}\label{sec:projektrol:kommunikacio}
+\section{Komponensek kommunikációjának megvalósítása}\label{sec:projektrol:kommunikacio}
 Az alkalmazás legösszetettebb komponense, a szerver, Java programozási nyelvben íródott és szolgáltatásait a web-kliens számára REST (Representational State Transfer) \cite{REST} konvencióknak megfelelő endpointokon keresztül publikálja, melyek HTTP kérések által érhetőek el. 
 \begin{figure}[!t]
   \centering
@@ -60,7 +60,7 @@ A REST egy olyan architektúrális modell, amelyet az állapot nélküli, kliens
 A perzisztencia megvalósítására MySQL adatbázist használ, mellyel a Spring keretrendszer által biztosított Java Persistence API (JPA) imlementációja segítségével kommunikál. A Spring JPA egy absztrakciós szintet képvisel a JPA fölött, a fejlesztőknek nem kell implementálniuk az adathozzáférést végző osztályokat, elegendő kiterjeszteniük a keretrendszer által biztosított interfészeket. 
 
 
-\begin{reviewed}
+
 \section{Adatmodell}\label{sec:projektrol:adatmodell}
 \begin{figure}[!t]
   \centering
@@ -87,4 +87,4 @@ Az \texttt{InvitationRequest} entitás teszi lehetővé a meghívók igénylés�
 A meghíváson alapuló regisztráció megvalósítását a \texttt{RegistrationToken} osztály biztosítja, mely tartalmazza magát a tokent, a token lejárati idejét, az email címet amelyre küldték a meghívót, illetve tárolja a felhasználót, aki küldte a meghívót. 
 
 A szerepkör alapú jogosultságkezelés a \texttt{Role} enum típus segítségével valósul meg, melynek értéke lehet \texttt{ROLE\_USER} és \texttt{ROLE\_ADMIN}. Minden felhasználó rendelkezik egy szerepkörrel, amely regisztrációkor automatikusan a \texttt{ROLE\_USER} értéket kapja. 
-\end{reviewed}
+

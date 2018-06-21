@@ -1,5 +1,5 @@
-\chapter{\textcolor{red}{Egyéb eszközök és technológiák}}\label{ch:egyebb_eszkozok}
-\section{\textcolor{red}{Alkalmazott munkamódszer}}
+\chapter{Egyéb eszközök és technológiák}\label{ch:egyebb_eszkozok}
+\section{Alkalmazott munkamódszer}
 Az alkalmazás fejlesztése a Scrum szofterfejlesztési módszertan szabályainak betartásával zajlott. A Scrum egy inkrementális, iteratív munkamódszer, amely különböző tevékenységeket és meghatározott szerepeket foglal magába (\ref{fig:scrum}. ábra ~\footnote{Kép forrása: \url{https://www.boost.co.nz/blog/2018/03/what-is-scrum-product-owner-primer.html}, utolsó megtekintés dátuma: 2018-06-15}). 
 \begin{figure}
   \centering
@@ -21,7 +21,7 @@ A \textit{Visszatekintés} (Retrospective) lehetőséget nyújt a sprint alatt f
 
 A Scrum szoftverfejlesztési módszer előnyei közé tartozik, hogy a fejlesztők a munka során folyamatos visszajelzést kapnak a megrendelőtől, így a tulajdonos igényeinek megfelelően tudják alakítani az alkalmazás funkcionalitásait.
 
-\section{\textcolor{red}{Verziókövetés és folyamatos integráció}}
+\section{Verziókövetés és folyamatos integráció}
 A projekt fejlesztése során a verziókövetés megvalósítása Git által történt, projektmenedzsment eszközként és a folyamatos integráció  \cite{CI} illetve a folyamatos kitelepítés \cite{CD}  biztosítására a GitLab szolgált. 
 
 A GitLab egy platformfüggetlen, nyílt forráskódú webes projektmenedzsment szoftver, amely lehetővé teszi az alkalmazások biztonságos tárolását, különböző funkcionalitásai által segíti a szoftverfejlesztők rugalmas együttműködését, a kódfelmérések és merge requestek (kódösszeolvasztási kérelmek)  végrehajtását\cite{GitLabRegistry}. 
@@ -38,7 +38,7 @@ A folyamatos integráció megvalósítása egy CI pipeline segítségével tört
 
 
 
-\begin{reviewed}
+
 \section{Build és függőségkezelő eszközök}
 \label{subsec:gradle}
 A kliens oldal függőségeit az npm (Node Package Manager) \cite{npm} kezeli, és a Gulp \cite{gulp} injektálja automatikusan a forráskódba a \texttt{gulpfile.js} segítségével. A \texttt{gulpfile.js} különböző task-okból áll, melyek futtathatóak külön-külön, de akár együtt is. 
@@ -52,8 +52,8 @@ Szerver oldali build- és függőségkezelő eszközként a csapat a Gradle mell
 Gradle scriptek írására Groovy alapú DSL (Domain Specific Languaget) vagy Kotlin script használható.  A Gradle támogatja a függőségek automatikus letöltését és konfigurálását, több modulos projektek létrehozását, Eclipse projekteket generál, valamint teszteket és kódelemzőket futtat. Az \texttt{'application'} plugin segítségével becsomagolja az alkalmazást teljes függőségi gráffal és indító szkriptekkel, így az egyszerűen elmozgatható bárhova. Külső pluginokkal kiterjesztve lehetővé teszi a build-elési folyamat teljes automatizációját. 
 
 A Gradle a teljes projektet build-eli, hiszen a \texttt{'gulp'} plugin segítségével meghívja a Gulp megfelelő utasításait, ezáltal build-elve a frontend oldali kódot is. Az eredményt pedig a Gradle build mappájába másolja, és beállítja az eclipse classpath-jében, hogy az hol keresse a projekt erőforrásait és hová build-eljen. 
-\end{reviewed}
-\section{\textcolor{red}{Az alkalmazás tesztelése}}
+
+\section{Az alkalmazás tesztelése}
 \label{sec:tesztek}
 
 Az alkalmazás kliens oldalának tesztelése a Jasmine keretrendszer és a Karma test runner segítségével történt. A Jasmine egy olyan keretrendszer, amely JavaScript kódok tesztelésének megkönnyítése érdekében készült és segítségével követhető a viselkedés orientált (Behaviour Driven Development) munkamódszer. A viselkedés orientáltság biztosítja, hogy a megírt tesztek könnyen olvashatóak és értelmezhetőek mindenki számára \cite{Jasmine}. A Karma lehetőséget kínál a Jasmine tesztek különböző böngészőkben való automatikus futtatására és az eredmények konzolra történő kiiratására~\cite{KarmaJasmine}.
@@ -66,7 +66,7 @@ A Selenium egy olyan keretrendszer, amely lehetőséget biztosít az alkalmazás
 
 Az projekt buildelése során lefutnak a szerver illetve kliens oldali unit tesztek, melyeknek sikertelensége a build folyamat bukásához vezetnek. Az E2E tesztek jelenleg nincsenek automatizálva, nem képezik részét a push során létrejövő pipeline egyetlen fázisának sem. 
 
-\section{\textcolor{red}{Használt fejlesztői környezetek}}
+\section{Használt fejlesztői környezetek}
 \label{subsec:fejleszoiKornyezet}
 
 A szerver oldal fejlesztése Eclipse \cite{Eclipse} fejlesztői környezetben történt, amely a Buildship Gradle Integration pluginnal \cite{GradlePlugin} kiegészítve alkalmas Gradle alkalmazások beintegrálására és kibővítve a FindBugs Eclipse Plugin-nal\cite{FindBugsEclipsePlugin} lehetővé teszi a statikus kódelemzést implemetálás közben. A kliens oldal fejlesztése pedig a Visual Studio Code \cite{VSCode} segítségével történt, mivel kiegészíthető HTML, CSS és JS szerkesztőkkel, valamint frontend oldali statikus kódelemzővel. 

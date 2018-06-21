@@ -1,10 +1,10 @@
-\chapter{\textcolor{red}{Szerver oldali technológiák}}\label{ch:szerver}
+\chapter{Szerver oldali technológiák}\label{ch:szerver}
 
 \begin{osszefoglal}
 Az E-migrated alkalmazás szerver oldali komponensének alapja a Java programozási nyelv és a Spring keretrendszer. Ez a fejezet bemutatja a szerver architekturális megoldásait, leírja a különböző rétegeket, a szerver oldalon használt technológiákat,  a komponensek működését és egymással való kommunikációját. 
 \end{osszefoglal}
 
-\section{\textcolor{red}{Szerver oldali architekturális megoldások}}
+\section{Szerver oldali architekturális megoldások}
 \label{sec:szerverArch}
 
 A szerver töbrétegű architekturára épül \cite{MultitierArchitecture}, melynek előnye, hogy a különböző funkciókat megvalósító rétegek egymástól elkülöníthetőek, ezáltal a tőlük függő komponensek módosítása nélkül is lecserélhetőek, illetve a további bővítés és tesztelhetőség is egyszerűen kivitelezhetővé válik. A szerver oldali komponens architekturája \aref{fig:ServerArchitecture}. ábrán látható módon van modularizálva. 
@@ -21,7 +21,7 @@ A \textit{szolgáltatási réteg} tartalmazza az alkalmazás logikáját és meg
 
 
 
-\begin{reviewed}
+
 \section{Spring keretrendszer}
 \label{subsec:Spring}
 
@@ -94,7 +94,7 @@ A \texttt{FacebookConnectionService} osztály hozzájárul a Facebook-kal való 
 \label{subsec:API}
 
 Mivel az API réteg felelős a klienssel való kommunikációért és ezt egy RESTful alkalmazás segítségével teszi meg, kézenfekvő volt használni a Spring által biztosított spring-web csomagot, amely segítségével egyszerűen implementálható egy RESTful alkalmazás. 
-\end{reviewed}
+
 \subsection{Spring Web modul}\label{subsubsec:SpringWeb}
 A Spring Web modul lehetővé teszi egy Spring keretrendszerre épülő web-alkalmazás létrehozását bonyolult xml állományok nélkül. 
 
@@ -104,7 +104,7 @@ annotáció segítségével adható meg. A HTTP kérések kezelőkhöz való ren
 Az E-migrated alkalmazás esetében a kontrollerek szerepét a \texttt{Resource} osztályok töltik be. Ezek az osztályok injektálják a számukra szükséges szolgáltatás-rétegbeli interfészeket, és ha szükséges továbbítják számukra az adatokat további feldolgozás érdekében.
 
 
-\begin{reviewed}
+
 \subsection{Data Transfer Object}
 \label{subsubsec:DTO}
 \begin{figure}[!b]
@@ -171,10 +171,10 @@ Az üzenet felépítése és küldése (\ref{lst:sendEmail}. kódrészlet) sorá
 Az E-migrated alkalmazás esetében a különböző e-mailek felépítése és elküldése, a \texttt{util} modulon belül levő \texttt{MailSenderBean} osztályban történik. Az e-mail küldéshez szükséges konfigurációs beállítások pedig a \texttt{conf} modulon belül a \texttt{MailSender} konfigurációs osztályban találhatóak meg. Ezeket az értékeket a rendszer egy \texttt{mail.properties} állományból olvassa be a \ref{subsubsec:DTO} fejezetben említett módon. Ebben az állományban található meg többek között az e-mailszerver elérési útvonala és azon belül az alkalmazásnak lefoglalt felhasználónév és jelszó.
 
 A dinamikusan felépített e-mailek renderelése Freemarker templatek alapján történik a Spring Web MVC (Model View Controller) segítségével.
-\end{reviewed}
 
 
-\section{\textcolor{red}{Hibakezelés}}
+
+\section{Hibakezelés}
 \label{sec:hibakezeles}
 A kivételkezelés az alkalmazáson belül rétegenként egységesen történik, mely szerint az alsóbb rétegek naplózzák és burkolják a kivételeket, majd így továbbítják a felsőbb rétegeknek. Az adathozzáférési réteg által dobott kivételeket a szolgáltatási réteg kapja el, és burkolva továbbítja az API rétegnek. Az API réteg kezeli, és HTTP válaszkóddal kiegészítve továbbítja a kliens részére. Ennek előnye, hogy a rétegek egymástól függetlenné válnak, bármikor egyszerűen lecserélhetőek, és a felfele propagáló hibákból a kliens csak annyit lát, amennyire szüksége van, az implementációs részletek rejtve maradnak. 
 
